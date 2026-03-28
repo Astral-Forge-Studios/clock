@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clock & Quotes App</title>
+
+<!-- Favicon s B style -->
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="%2358a6ff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="40" fill="white" font-family="Inter,Arial,sans-serif">B</text></svg>'>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #58a6ff;
+    margin-bottom: 10px;
+}
+
+#clock {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+#quote-box {
+    background: #161b22;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #21262d;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+#quote-box:hover {
+    transform: translateY(-5px);
+    border-color: #58a6ff;
+}
+
+#quote-text {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #c9d1d9;
+}
+
+#new-quote-btn {
+    padding: 10px 20px;
+    border: none;
+    background: #58a6ff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#new-quote-btn:hover {
+    background: #79b3ff;
+}
+</style>
+</head>
+<body>
+
+<h1>Aktuální čas</h1>
+<div id="clock">00:00:00</div>
+
+<div id="quote-box">
+    <div id="quote-text">Klikni na tlačítko pro nový citát!</div>
+    <button id="new-quote-btn">Nový citát</button>
+</div>
+
+<script>
+// Funkce pro hodiny
+function aktualizujCas() {
+    const clock = document.getElementById('clock');
+    const now = new Date();
+    const hodiny = now.getHours().toString().padStart(2,'0');
+    const minuty = now.getMinutes().toString().padStart(2,'0');
+    const sekundy = now.getSeconds().toString().padStart(2,'0');
+    clock.textContent = `${hodiny}:${minuty}:${sekundy}`;
+}
+setInterval(aktualizujCas, 1000);
+aktualizujCas();
+
+// Citáty
+const citaty = [
+    "Věř v sebe a všechno je možné.",
+    "Kreativita je inteligence, která se baví.",
+    "Nezáleží na rychlosti, ale na směru.",
+    "Chyby jsou příležitostí učit se.",
+    "Každý velký projekt začíná malým krokem."
+];
+
+// Funkce pro nový citát
+function novyCitat() {
+    const index = Math.floor(Math.random() * citaty.length);
+    document.getElementById('quote-text').textContent = citaty[index];
+}
+
+// Event pro tlačítko
+document.getElementById('new-quote-btn').addEventListener('click', novyCitat);
+</script>
+
+</body>
+</html>
